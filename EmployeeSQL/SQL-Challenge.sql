@@ -46,3 +46,10 @@ create table titles (
 );
 
 select * from titles
+
+-- Queries to join tables
+
+select * 
+from employees as dm
+inner join salaries as s on dm.emp_no = s.emp_no
+limit(50)
