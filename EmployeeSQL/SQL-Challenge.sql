@@ -1,55 +1,63 @@
--- Creating tables for importing all 6 CSVs
+-- List the following details of each employee: employee number, last name, first name, sex, and salary.
 
-create table departments (
-	dept_no varchar not null,
-	dept_name varchar not null
-);
+select emp.emp_no, emp.last_name, emp.first_name, emp.sex, sal.salary 
+from employees as emp
+inner join salaries as sal ON
+emp.emp_no = sal.emp_no
+order by emp_no asc
+limit(100)
 
-select * from departments
+-- List first name, last name, and hire date for employees who were hired in 1986.
 
-create table dept_emp (
-	emp_no varchar not null,
-	dept_no varchar not null
-);
+select e.first_name, e.last_name, e.hire_date
+from employees as e 
+where hire_date between '1/1/1986' and '12/31/1986'
+order by last_name asc
+limit(2000)
 
-select * from dept_emp
+-- List the manager of each department with the following information: 
+-- department number, department name, the manager's employee number, last name, first name.
 
-create table dept_manager (
-	dept_no varchar not null,
-	emp_no varchar not null
-);
+select d.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
+from departments as d
+inner join dept_manager as dm ON d.dept_no = dm.dept_no
+inner join employees as e on e.emp_no = dm.emp_no
+order by dept_no asc, last_name asc 
 
-select * from dept_manager
+-- List the department of each employee with the following information: 
+-- employee number, last name, first name, and department name.
 
-create table employees (
-	emp_no varchar not null,
-	emp_title_id varchar not null,
-	birth_date varchar not null,
-	first_name varchar not null,
-	last_name varchar not null,
-	sex varchar not null,
-	hire_date varchar not null
-);
+select e.emp_no, e.last_name, e.first_name, d.dept_name
+from employees as e 
+inner join dept_emp as de on e.emp_no = de.emp_no
+inner join departments as d on d.dept_no = de.dept_no
+order by emp_no ASC
+limit(500)
 
-select * from employees
+-- List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
 
-create table salaries (
-	emp_no varchar not null,
-	salary int
-);
+select first_name, last_name, sex
+from employees
+where first_name = 'Hercules'
+and last_name like 'B%'
 
-select * from salaries
+-- List all employees in the Sales department, including their employee number, last name, first name, and department name.
 
-create table titles (
-	title_id varchar not null,
-	title varchar not null
-);
+select e.emp_no, e.last_name, e.first_name, d.dept_name
+from employees as e 
+inner join dept_emp as de on e.emp_no = de.emp_no
+inner join departments as d on d.dept_no = de.dept_no
+where dept_name = 'Sales'
+order by emp_no ASC
+limit(500)
 
-select * from titles
+-- List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
 
--- Queries to join tables
+select e.emp_no, e.last_name, e.first_name, d.dept_name
+from employees as e 
+inner join dept_emp as de on e.emp_no = de.emp_no
+inner join departments as d on d.dept_no = de.dept_no
+where dept_name = 'Sales' or dept_name = 'Development'
+order by dept_name ASC, emp_no ASC
 
-select * 
-from employees as dm
-inner join salaries as s on dm.emp_no = s.emp_no
-limit(50)
+-- In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
