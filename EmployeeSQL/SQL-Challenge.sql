@@ -31,18 +31,16 @@ select e.emp_no, e.last_name, e.first_name, d.dept_name
 from employees as e 
 inner join dept_emp as de on e.emp_no = de.emp_no
 inner join departments as d on d.dept_no = de.dept_no
-order by emp_no ASC
-limit(500)
+order by dept_name ASC, emp_no ASC
 
 -- List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
-
 select first_name, last_name, sex
 from employees
 where first_name = 'Hercules'
 and last_name like 'B%'
+order by last_name ASC
 
 -- List all employees in the Sales department, including their employee number, last name, first name, and department name.
-
 select e.emp_no, e.last_name, e.first_name, d.dept_name
 from employees as e 
 inner join dept_emp as de on e.emp_no = de.emp_no
@@ -52,7 +50,6 @@ order by emp_no ASC
 limit(500)
 
 -- List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
-
 select e.emp_no, e.last_name, e.first_name, d.dept_name
 from employees as e 
 inner join dept_emp as de on e.emp_no = de.emp_no
