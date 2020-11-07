@@ -62,5 +62,12 @@ order by dept_name ASC, emp_no ASC
 
 -- In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 
+select last_name, count(last_name) as frequency
+from employees
+group by last_name
+order by count(last_name) DESC
+
+-- Looking for how many total unique last names there are to check my frequency query 
+
 select count(distinct last_name) as "Number of Employees"
 from employees;
