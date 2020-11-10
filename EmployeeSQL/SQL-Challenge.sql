@@ -5,7 +5,6 @@ from employees as emp
 inner join salaries as sal ON
 emp.emp_no = sal.emp_no
 order by emp_no asc
-limit(100)
 
 -- List first name, last name, and hire date for employees who were hired in 1986.
 
@@ -13,7 +12,6 @@ select e.first_name, e.last_name, e.hire_date
 from employees as e 
 where hire_date between '1/1/1986' and '12/31/1986'
 order by hire_date asc, last_name asc
-limit(2000)
 
 -- List the manager of each department with the following information: 
 -- department number, department name, the manager's employee number, last name, first name.
@@ -49,7 +47,6 @@ inner join dept_emp as de on e.emp_no = de.emp_no
 inner join departments as d on d.dept_no = de.dept_no
 where dept_name = 'Sales'
 order by emp_no ASC
-limit(500)
 
 -- List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
 
